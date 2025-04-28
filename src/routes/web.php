@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 
 
@@ -18,13 +20,11 @@ Route::middleware(['auth'])->group(function() {
         return view('admin');
     })->middleware(AdminMiddleware::class)->name('admin');
 
-    Route::get('/profile-edit', function () {
-        return view('profile.edit');
-    })->middleware(AdminMiddleware::class)->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/profile-update', function () {
-        return view('profile.update');
-    })->middleware(AdminMiddleware::class)->name('profile.update');
+    Route::resource('/users', UserController::class)->middleware(AdminMiddleware::class);
 });
 
 require __DIR__.'/auth.php';

@@ -27,6 +27,17 @@ class User extends Authenticatable
     public function isAdmin() : bool {
         return $this->role === 'admin';
     }
+
+    public static function rules($userId = null)
+    {
+        return [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $userId,
+            'password' => 'required|min:8',
+            'role' => 'required'
+        ];
+    }
+
     public static function roles() : array {
         return [
             'user' => 'Usuario',
