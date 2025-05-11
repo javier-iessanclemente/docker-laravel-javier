@@ -12,6 +12,8 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,8 +26,8 @@ class User extends Authenticatable
         'role',
     ];
 
-    public function isAdmin() : bool {
-        return $this->role === 'admin';
+    public function isTaller() : bool {
+        return $this->role === 'taller';
     }
 
     public static function rules($userId = null)
@@ -40,8 +42,8 @@ class User extends Authenticatable
 
     public static function roles() : array {
         return [
-            'user' => 'Usuario',
-            'admin' => 'Administrador',
+            'cliente' => 'Cliente',
+            'taller' => 'Taller',
         ];
     }
 

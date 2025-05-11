@@ -4,16 +4,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DateController;
+use App\Http\Controllers\ClientDateController;
+use App\Http\Controllers\PendingDateController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\ClientMiddleware;
 
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('home');
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return redirect(url('/'));
     })->middleware(['auth', 'verified'])->name('dashboard');
     
     Route::get('/admin', function () {
@@ -25,6 +29,15 @@ Route::middleware(['auth'])->group(function() {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('/users', UserController::class)->middleware(AdminMiddleware::class);
+
+    Route::get('/dates', [DateController::class, 'edit'])->name('dates.edit');
+    Route::patch('/dates', [DateController::class, 'update'])->name('dates.update');
+    Route::delete('/dates', [DateController::class, 'destroy'])->name('dates.destroy');
+
+    //Route::resource('/dates', DateController::class)->middleware(AdminMiddleware::class);
+    Route::resource('/dates', DateController::class)->middleware(AdminMiddleware::class);
+    Route::resource('/mydates', ClientDateController::class)->middleware(ClientMiddleware::class)->only(['index', 'create', 'store', 'show']);
+    Route::resource('/pending_dates', PendingDateController::class)->middleware(AdminMiddleware::class);
 });
 
 require __DIR__.'/auth.php';
