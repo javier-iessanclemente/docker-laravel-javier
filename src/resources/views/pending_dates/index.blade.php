@@ -39,10 +39,14 @@
                                         <td class="border border-gray-300 px-4 py-2 w-1/3 truncate whitespace-nowrap">{{ $date->cliente->name }}</td>
                                         <td class="border border-gray-300 px-4 py-2 w-1/3 truncate whitespace-nowrap">Marca: {{ $date->marca }}<br>Matrícula: {{ $date->matricula }}<br>Modelo: {{ $date->modelo }}</td>
                                         <td class="border border-gray-300 px-4 py-2 w-1/3 truncate whitespace-nowrap">{{ $date->fecha }}</td>
+                                        @if($date->hora != null)
                                         @php
                                             $hora = new Datetime($date->hora);
                                         @endphp
                                         <td class="border border-gray-300 px-4 py-2 w-1/3 truncate whitespace-nowrap">{{ $hora->format('H:i') }}</td>
+                                        @else
+                                        <td class="border border-gray-300 px-4 py-2 w-1/3 truncate whitespace-nowrap"></td>
+                                        @endif
                                         @if($date->duracion != null)
                                         <td class="border border-gray-300 px-4 py-2 w-1/3 truncate whitespace-nowrap">{{ $date->duracion }} minutos</td>
                                         @else 

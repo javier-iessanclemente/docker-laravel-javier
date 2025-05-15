@@ -114,7 +114,7 @@ class ClientDateController extends DateController
             $request->fecha= $fechayHora->format('Y-m-d');
             $request->hora= $fechayHora->format('H:i');
             $rules = Date::rules($date->id);
-            $request->validate($rules, , [
+            $request->validate($rules, [
                 'id_cliente:exists' => 'El id del cliente no es valido',
                 'id_cliente.integer' => 'El id del cliente debe ser un numero',
                 'marca.required' => 'Debes incluír la marca del coche',
