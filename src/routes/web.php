@@ -35,7 +35,6 @@ Route::middleware(['auth'])->group(function() {
     Route::patch('/dates', [DateController::class, 'update'])->name('dates.update');
     Route::delete('/dates', [DateController::class, 'destroy'])->name('dates.destroy');
 
-    //Route::resource('/dates', DateController::class)->middleware(AdminMiddleware::class);
     Route::resource('/dates', DateController::class)->middleware(AdminMiddleware::class);
     Route::resource('/mydates', ClientDateController::class)->middleware(ClientMiddleware::class)->only(['index', 'create', 'store', 'show']);
     Route::resource('/pending_dates', PendingDateController::class)->middleware(AdminMiddleware::class);
