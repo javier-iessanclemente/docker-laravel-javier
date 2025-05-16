@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Date;
+use App\Models\Coche;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use DateTime;
@@ -87,6 +88,20 @@ class DatabaseSeeder extends Seeder
             'marca' => 'Ferrari',
             'matricula' => '8765TRE',
             'modelo' => 'Ferrari 2000',
+        ]);
+
+        Coche::create([
+            'id_cliente' => 2,
+            'marca'=>'Seat',
+            'matricula'=>'1234LOU',
+            'modelo'=>'Seat 500',
+        ]);
+
+        Coche::create([
+            'id_cliente' => 1,
+            'marca'=>'Fiat',
+            'matricula'=>'4321LOU',
+            'modelo'=>'Fiat 500',
         ]);
     }
 }
