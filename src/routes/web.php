@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DateController;
+use App\Http\Controllers\CarsController;
 use App\Http\Controllers\ClientDateController;
 use App\Http\Controllers\PendingDateController;
 use App\Http\Middleware\AdminMiddleware;
@@ -38,6 +39,8 @@ Route::middleware(['auth'])->group(function() {
     Route::resource('/dates', DateController::class)->middleware(AdminMiddleware::class);
     Route::resource('/mydates', ClientDateController::class)->middleware(ClientMiddleware::class)->only(['index', 'create', 'store', 'show']);
     Route::resource('/pending_dates', PendingDateController::class)->middleware(AdminMiddleware::class);
+
+    Route::get('/cars', [CarsController::class, 'index'])->name('cars');
 });
 
 require __DIR__.'/auth.php';
